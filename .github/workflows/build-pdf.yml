@@ -1,0 +1,38 @@
+name: Build and Publish Monograph PDF
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'MetaComplexityMonograph20.tex'
+      - '.github/workflows/build-pdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX Monograph via XeLaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: MetaComplexityMonograph20.tex
+          latexmk_use_xelatex: true
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MetaComplexityMonograph20-PDF
+          path: MetaComplexityMonograph20.pdf
+
+      - name: Commit compiled PDF to repository
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs(monograph): compile and publish MetaComplexityMonograph20.pdf"
+          commit_author: "Tornado guy <210052688+Tornadoguy69@users.noreply.github.com>"
+          file_pattern: "MetaComplexityMonograph20.pdf"
