@@ -47,6 +47,7 @@
 \newtheorem{remark}[theorem]{Remark}
 
 \DeclareRobustCommand{\lean}[1]{{\ttfamily\textcolor{slate}{\begingroup\hyphenchar\font=`\-\def\_{\textunderscore\allowbreak}#1\endgroup}}}
+\newcommand{\leanb}[1]{\texttt{\textcolor{slate}{#1}}}
 \newcommand{\MCSP}{\mathsf{MCSP}}
 \newcommand{\CAPP}{\mathsf{CAPP}}
 \newcommand{\DTIME}{\mathsf{DTIME}}
@@ -443,8 +444,17 @@ Finally, Stage 20 confronts the \textbf{Razborov-Rudich Natural Proofs Barrier (
 
 Table \ref{tab:ledger} catalogues all 20 namespaces, their primary machine-checked theorems in Lean 4, and their exact mathematical role. Every theorem compiles with \textbf{zero \lean{sorry}s and zero \lean{axiom}s}.
 
-\setlength{\tabcolsep}{4pt}
-\begin{longtable}{@{} c >{\raggedright\arraybackslash\footnotesize}p{0.28\textwidth} >{\raggedright\arraybackslash\footnotesize}p{0.33\textwidth} >{\raggedright\arraybackslash\small}p{0.32\textwidth} @{}}
+\begingroup
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.35}
+
+\begin{longtable}{@{}
+  >{\raggedright\arraybackslash}p{0.04\textwidth}
+  >{\raggedright\arraybackslash}p{0.27\textwidth}
+  >{\raggedright\arraybackslash}p{0.33\textwidth}
+  >{\raggedright\arraybackslash}p{0.30\textwidth}
+@{}}
 \caption{Complete 20-Stage Machine-Verified Theorem Ledger}\label{tab:ledger}\\
 \toprule
 \textbf{\#} & \textbf{Lean 4 Namespace} & \textbf{Primary Verified Theorem} & \textbf{Complexity Milestone} \\
@@ -456,46 +466,88 @@ Table \ref{tab:ledger} catalogues all 20 namespaces, their primary machine-check
 \endhead
 \bottomrule
 \endfoot
-1 & \lean{Stage1\_Pigeonhole\allowbreak Root} & \lean{constructive\_root\_pos} & Constructive Finset proof that $2^n - 2^{n-2} > 0$ strings are incompressible. \\
-\addlinespace
-2 & \lean{Stage2\_LevinKt} & \lean{no\_polytime\_levin\_solver} & Refutes $O(n^c)$ subtree solvers for Levin's $\Kt(x) = |p| + \lfloor\log_2 t\rfloor$. \\
-\addlinespace
-3 & \lean{Stage3\_Scalar\allowbreak Impossibility} & \lean{scalar\_impossibility\_theorem} & Proves no static penalty $\Phi(t)$ can stay in $\DTIME(n^K)$ and absorb $n^{c+1}$. \\
-\addlinespace
-4 & \lean{Stage4\_Kannan\allowbreak FixedExponent} & \lean{fixed\_exponent\_circuit\_lower\_bound} & Fixed-exponent circuit bound ($\Size(n^k)$) via catalytic description reuse. \\
-\addlinespace
-5 & \lean{Stage5\_Locality\allowbreak Barrier} & \lean{locality\_barrier\_blocks\_relativizing\_lower\_bounds} & Proves $N^\alpha$-local oracle gates cap relativizing bounds at $N + 10$. \\
-\addlinespace
-6 & \lean{Stage6\_Polylog\allowbreak SweetSpot} & \lean{polylog\_sweet\_spot\_refutes\_uhlig\_sharing} & Kills Uhlig's shared table ($2^{m^2-2m} > N^k$) at $B = (\log_2 N)^2$. \\
-\addlinespace
-7 & \lean{Stage7\_Algebraic\allowbreak TensorRigidity} & \lean{algebraic\_rigidity\_triggers\_magnification} & Proves high tensor rank blocks FMM sharing and triggers Magnification. \\
-\addlinespace
-8 & \lean{Stage8\_MultiLayer\allowbreak KRWRigidity} & \lean{multilayer\_krw\_triggers\_magnification} & $L$-layer KRW entropy induction reducing multi-layer circuits to Stage 7. \\
-\addlinespace
-9 & \lean{Stage9\_Forster\allowbreak RazborovRank} & \lean{stage1\_to\_stage9\_full\_bridge\_refutation} & Bridges Stage 1's decoder bound into Razborov's rectangle rank bound. \\
-\addlinespace
-10 & \lean{Stage10\_TheTrue\allowbreak FrontierAudit} & \lean{stage9\_polarity\_clash\_theorem} & Proves Stage 9's unsigned cover clash ($m \ge 3$) \& isolates Direct-Sum Conjecture. \\
-\addlinespace
-11 & \lean{Stage11\_Gate\allowbreak Elimination5N\allowbreak Barrier} & \lean{gate\_elimination\_fails\_superlinear\_magnification} & Proves Diamond wire re-convergence caps bit-fixing at $5N < N \log_2 N$. \\
-\addlinespace
-12 & \lean{Stage12\_Signed\allowbreak Discrepancy\allowbreak Repair} & \lean{stage12\_refutes\_poly\_algebraic\_sharing} & Repairs Stage 9 via $\pm 1$ signed discrepancy sums (\lean{Int.natAbs}). \\
-\addlinespace
-13 & \lean{Stage13\_Williams\allowbreak CAPP\allowbreak Hybrid\allowbreak Extraction} & \lean{stage13\_williams\_capp\_triggers\_p\_neq\_np} & Absorbs both Diamond branches ($7 > 5$) via $\F_2$ polynomials \& $\CAPP$. \\
-\addlinespace
-14 & \lean{Stage14\_Razborov\allowbreak Smolensky\allowbreak DegreeBarrier} & \lean{stage14\_degree\_compression\_triggers\_p\_neq\_np} & Proves $\text{AND}/\text{OR}$ degree doubling ($2^d$) \& chains degree compression to Stage 13. \\
-\addlinespace
-15 & \lean{Stage15\_Subbotovskaya\allowbreak FanoutShrinkage} & \lean{stage15\_discrepancy\_plus\_shrinkage\_triggers\_p\_neq\_np} & Proves tree shrinkage compresses degree $< N$ when Signed Discrepancy kills hubs. \\
-\addlinespace
-16 & \lean{Stage16\_Valiant\allowbreak DepthReduction\allowbreak Rigidity} & \lean{stage16\_valiant\_separator\_triggers\_p\_neq\_np} & Proves Valiant's pigeonhole cut bound ($\mathrm{minCut} \le S / \log_2 D$) \& audits Menger Superconcentrators. \\
-\addlinespace
-17 & \lean{Stage17\_Information\allowbreak Theoretic\allowbreak XORBlowup} & \lean{stage17\_semantic\_dichotomy\_triggers\_p\_neq\_np} & Proves $\text{AND}/\text{OR}$ log-bias doubling ($2^d$) vs.\ $3N$ De Morgan $\text{XOR}$ blowup. \\
-\addlinespace
-18 & \lean{Stage18\_Boppana\allowbreak Monotone\allowbreak Threshold\allowbreak Collapse} & \lean{stage18\_correlated\_dag\_triggers\_p\_neq\_np} & Proves correlated monotone $\text{MAJ}_3$ costs $4 \ge 3$ gates \& reduces to Stage 17. \\
-\addlinespace
-19 & \lean{Stage19\_Shared\allowbreak GateTensor\allowbreak Amortization\allowbreak Audit} & \lean{stage19\_amortization\_audit\_triggers\_p\_neq\_np} & Proves sub-3-gate switch amortization forces Uhlig blowup or Valiant cut. \\
-\addlinespace
-20 & \lean{Stage20\_Razborov\allowbreak Rudich\allowbreak NaturalProofs\allowbreak Bridge} & \lean{stage20\_self\_referential\_win\_win\_triggers\_p\_neq\_np} & Bypasses Razborov-Rudich via Kabanets-Cai duality \& eliminates $2^{km}$ budget. \\
+
+1 & \leanb{Stage1\_\allowbreak PigeonholeRoot} 
+  & \leanb{constructive\_\allowbreak root\_pos} 
+  & Constructive Finset proof that $2^n - 2^{n-2} > 0$ strings are incompressible. \\
+
+2 & \leanb{Stage2\_\allowbreak LevinKt} 
+  & \leanb{no\_polytime\_\allowbreak levin\_solver} 
+  & Refutes $O(n^c)$ subtree solvers for Levin's $\Kt(x) = |p| + \lfloor\log_2 t\rfloor$. \\
+
+3 & \leanb{Stage3\_\allowbreak ScalarImpossibility} 
+  & \leanb{scalar\_impossibility\_\allowbreak theorem} 
+  & Proves no static penalty $\Phi(t)$ can stay in $\DTIME(n^K)$ and absorb $n^{c+1}$. \\
+
+4 & \leanb{Stage4\_\allowbreak KannanFixedExponent} 
+  & \leanb{fixed\_exponent\_\allowbreak circuit\_lower\_bound} 
+  & Fixed-exponent circuit bound ($\Size(n^k)$) via catalytic description reuse. \\
+
+5 & \leanb{Stage5\_\allowbreak LocalityBarrier} 
+  & \leanb{locality\_barrier\_\allowbreak blocks\_relativizing\_\allowbreak lower\_bounds} 
+  & Proves $N^\alpha$-local oracle gates cap relativizing bounds at $N + 10$. \\
+
+6 & \leanb{Stage6\_\allowbreak PolylogSweetSpot} 
+  & \leanb{polylog\_sweet\_spot\_\allowbreak refutes\_uhlig\_sharing} 
+  & Kills Uhlig's shared table ($2^{m^2-2m} > N^k$) at $B = (\log_2 N)^2$. \\
+
+7 & \leanb{Stage7\_\allowbreak AlgebraicTensor\allowbreak Rigidity} 
+  & \leanb{algebraic\_rigidity\_\allowbreak triggers\_magnification} 
+  & Proves high tensor rank blocks FMM sharing and triggers Magnification. \\
+
+8 & \leanb{Stage8\_\allowbreak MultiLayerKRW\allowbreak Rigidity} 
+  & \leanb{multilayer\_krw\_\allowbreak triggers\_magnification} 
+  & $L$-layer KRW entropy induction reducing multi-layer circuits to Stage 7. \\
+
+9 & \leanb{Stage9\_\allowbreak ForsterRazborovRank} 
+  & \leanb{stage1\_to\_stage9\_\allowbreak full\_bridge\_refutation} 
+  & Bridges Stage 1's decoder bound into Razborov's rectangle rank bound. \\
+
+10 & \leanb{Stage10\_\allowbreak TheTrueFrontierAudit} 
+   & \leanb{stage9\_polarity\_\allowbreak clash\_theorem} 
+   & Proves Stage 9's unsigned cover clash ($m \ge 3$) \& isolates Direct-Sum Conjecture. \\
+
+11 & \leanb{Stage11\_\allowbreak GateElimination\allowbreak 5NBarrier} 
+   & \leanb{gate\_elimination\_fails\_\allowbreak superlinear\_\allowbreak magnification} 
+   & Proves Diamond wire re-convergence caps bit-fixing at $5N < N \log_2 N$. \\
+
+12 & \leanb{Stage12\_\allowbreak SignedDiscrepancy\allowbreak Repair} 
+   & \leanb{stage12\_refutes\_poly\_\allowbreak algebraic\_sharing} 
+   & Repairs Stage 9 via $\pm 1$ signed discrepancy sums (\lean{Int.natAbs}). \\
+
+13 & \leanb{Stage13\_\allowbreak WilliamsCAPP\allowbreak HybridExtraction} 
+   & \leanb{stage13\_williams\_capp\_\allowbreak triggers\_p\_neq\_np} 
+   & Absorbs both Diamond branches ($7 > 5$) via $\F_2$ polynomials \& $\CAPP$. \\
+
+14 & \leanb{Stage14\_\allowbreak RazborovSmolensky\allowbreak DegreeBarrier} 
+   & \leanb{stage14\_degree\_\allowbreak compression\_triggers\_\allowbreak p\_neq\_np} 
+   & Proves $\text{AND}/\text{OR}$ degree doubling ($2^d$) \& chains degree compression to Stage 13. \\
+
+15 & \leanb{Stage15\_\allowbreak Subbotovskaya\allowbreak FanoutShrinkage} 
+   & \leanb{stage15\_discrepancy\_\allowbreak plus\_shrinkage\_\allowbreak triggers\_p\_neq\_np} 
+   & Proves tree shrinkage compresses degree $< N$ when Signed Discrepancy kills hubs. \\
+
+16 & \leanb{Stage16\_\allowbreak ValiantDepth\allowbreak ReductionRigidity} 
+   & \leanb{stage16\_valiant\_\allowbreak separator\_triggers\_\allowbreak p\_neq\_np} 
+   & Proves Valiant's pigeonhole cut bound and audits the Superconcentrator obstruction. \\
+
+17 & \leanb{Stage17\_\allowbreak InformationTheoretic\allowbreak XORBlowup} 
+   & \leanb{stage17\_semantic\_\allowbreak dichotomy\_triggers\_\allowbreak p\_neq\_np} 
+   & Proves $\text{AND}/\text{OR}$ log-bias doubling ($2^d$) vs.\ $3N$ $\text{XOR}$ superconcentrator blowup. \\
+
+18 & \leanb{Stage18\_\allowbreak BoppanaMonotone\allowbreak ThresholdCollapse} 
+   & \leanb{stage18\_correlated\_\allowbreak dag\_triggers\_\allowbreak p\_neq\_np} 
+   & Proves correlated $\text{MAJ}_3$ costs $4 \ge 3$ gates and reduces correlated DAGs to Stage 17. \\
+
+19 & \leanb{Stage19\_\allowbreak SharedGateTensor\allowbreak AmortizationAudit} 
+   & \leanb{stage19\_amortization\_\allowbreak audit\_triggers\_\allowbreak p\_neq\_np} 
+   & Proves sub-3-gate switch amortization forces Uhlig blowup or separator collapse. \\
+
+20 & \leanb{Stage20\_\allowbreak RazborovRudich\allowbreak NaturalProofsBridge} 
+   & \leanb{stage20\_self\_\allowbreak referential\_win\_win\_\allowbreak triggers\_p\_neq\_np} 
+   & Bypasses Razborov-Rudich via Kabanets-Cai MCSP/PRF duality \& eliminates $N^k$ budget. \\
 \end{longtable}
+\endgroup
 
 % ============================================================================
 % SECTION 8: Conclusion — Formal Verification Status and The Final Frontier
