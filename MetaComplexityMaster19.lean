@@ -3362,6 +3362,30 @@ theorem shared_gate_amortization_dichotomy
       omega
     · exact h_not_sep h_sep_lt
 
+/-- **STAGE 19 THEOREM A2' (Poly-Budget Variant): Direct Contradiction against Uhlig Table Lower Bound**
+    (Zero sorry, Zero xiom)
+    Alternative formulation directly targeting the polynomial circuit regime:
+    If shrink.deMorganCircuitSize < 2 ^ (m * m - 2 * m), then amortized switch cost < 3
+    cannot materialize Uhlig's universal lookup table (uhligTableSize ≥ 2 ^ (m * m - 2 * m)),
+    forcing the Valiant separator cut strictly below discrepancyHubThreshold. -/
+theorem shared_gate_amortization_dichotomy_poly_budget
+    {m M B N : ℕ}
+    {shrink : SubbotovskayaShrinkageModel m M B N}
+    {val : ValiantSeparatorSystem shrink}
+    (audit : SharedGateAmortizationSystem shrink val)
+    (h_small_circuit : shrink.deMorganCircuitSize < 3 * N)
+    (h_poly_budget : shrink.deMorganCircuitSize < 2 ^ (m * m - 2 * m)) :
+    val.totalEdges / val.logDepthSlices < val.discrepancyHubThreshold := by
+  by_contra h_not_sep
+  by_cases h_cost : audit.amortizedCostPerSwitch ≥ 3
+  · have h_ge3N := amortized_switches_ge_three_forces_three_N audit h_cost
+    omega
+  · have h_lt : audit.amortizedCostPerSwitch < 3 := by omega
+    rcases audit.amortization_forces_uhlig_or_separator h_lt with h_uhlig_le | h_sep_lt
+    · have h_tab := audit.uhlig_table_lb
+      omega
+    · exact h_not_sep h_sep_lt
+
 /-- **CONSTRUCTIVE BUILDER: Shared-Gate Amortization Audit Instantiates Stage 17's `SemanticSeparatorSystem`!**
     (Zero `sorry`, Zero `axiom`)
     - If `audit.amortizedCostPerSwitch ≥ 3`, Theorem A1 proves `shrink.deMorganCircuitSize ≥ 3 * N` (Left branch).
