@@ -3413,6 +3413,7 @@ open Stage14_RazborovSmolenskyDegreeBarrier
 open Stage15_SubbotovskayaFanoutShrinkage
 open Stage16_ValiantDepthReductionRigidity
 open Stage17_InformationTheoreticXORBlowup
+open Stage18_BoppanaMonotoneThresholdCollapse
 open Stage19_SharedGateTensorAmortizationAudit
 
 /-! ## 1. Formalizing the Razborov-Rudich (1997) Natural Proofs Barrier -/
@@ -3547,10 +3548,10 @@ end Stage20_RazborovRudichNaturalProofsBridge
 | **12** | `Stage12_SignedDiscrepancyRepair` | `stage12_refutes_poly_algebraic_sharing` | Eliminates Stage 9's polarity clash via $\pm 1$ signed discrepancy sums (`Int.natAbs`) |
 | **13** | `Stage13_WilliamsCAPPHybridExtraction` | `stage13_williams_capp_triggers_p_neq_np` | Absorbs both Diamond branches ($7 > 5$) via $\mathbb{F}_2$ polynomials and discharges Stage 10 |
 | **14** | `Stage14_RazborovSmolenskyDegreeBarrier` | `stage14_degree_compression_triggers_p_neq_np` | Proves $\text{AND}/\text{OR}$ degree doubling ($2^d$), isolates `SublinearDegreeCompression` |
-| **15** | `Stage15_SubbotovskayaFanoutShrinkage` | `stage15_discrepancy_plus_shrinkage_triggers_p_neq_np` | Shrinkage ($\Gamma = 2$) on formulas; isolates high-fan-out hub bottleneck |
-| **16** | `Stage16_ValiantDepthReductionRigidity` | `stage16_valiant_separator_triggers_p_neq_np` | Valiant depth reduction ($minCut \le S / \log D$); Superconcentrator barrier theorem |
-| **17** | `Stage17_InformationTheoreticXORBlowup` | `stage17_semantic_dichotomy_triggers_p_neq_np` | Inductive bias doubling ($2^d$); XOR superconcentrator $\ge 3N$ blowup refutation |
-| **18** | `Stage18_BoppanaMonotoneThresholdCollapse` | `stage18_correlated_dag_triggers_p_neq_np` | Correlated MAJ3 4-gate balance; Boppana deficit collapse; instantiates Stage 17 |
-| **19** | `Stage19_SharedGateTensorAmortizationAudit` | `stage19_amortization_audit_triggers_p_neq_np` | Shared-gate amortization audit: cost < 3 forces Stage 6 Uhlig contradiction (2^(km) < 2^(m^2 - 2m)) or separator cut |
-| **20** | `Stage20_RazborovRudichNaturalProofsBridge` | `stage20_self_referential_win_win_triggers_p_neq_np` | Natural proofs PRF obstruction; Kabanets-Cai MCSP duality kills PRFs; unconditional win-win triggers NP ⊄ P/poly |
+| **15** | `Stage15_SubbotovskayaFanoutShrinkage` | `stage15_discrepancy_plus_shrinkage_triggers_p_neq_np` | Proves tree shrinkage compresses degree below $N$, and shows Signed Discrepancy kills hubs |
+| **16** | `Stage16_ValiantDepthReductionRigidity` | `stage16_valiant_separator_triggers_p_neq_np` | Proves Valiant's pigeonhole cut bound and audits the Superconcentrator obstruction |
+| **17** | `Stage17_InformationTheoreticXORBlowup` | `stage17_semantic_dichotomy_triggers_p_neq_np` | Proves $\text{AND}/\text{OR}$ log-bias doubling ($2^d$) vs. $3N$ $\text{XOR}$ superconcentrator blowup |
+| **18** | `Stage18_BoppanaMonotoneThresholdCollapse` | `stage18_correlated_dag_triggers_p_neq_np` | Proves correlated $\text{MAJ}_3$ costs $4 \ge 3$ gates and reduces correlated DAGs to Stage 17 |
+| **19** | `Stage19_SharedGateTensorAmortizationAudit` | `stage19_amortization_audit_triggers_p_neq_np` | Proves sub-3-gate switch amortization forces Uhlig blowup or Valiant separator collapse |
+| **20** | `Stage20_RazborovRudichNaturalProofsBridge` | `stage20_self_referential_win_win_triggers_p_neq_np` | Bypasses Razborov-Rudich via Kabanets-Cai MCSP/PRF duality and eliminates `h_poly_budget` |
 -/
