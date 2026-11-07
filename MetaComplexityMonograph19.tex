@@ -452,10 +452,10 @@ Under \lean{CorrelatedDAGBalanceSystem}, Stage 18 chains end-to-end through Stag
 \subsection{Stage 19: Subagent $\Omega$ Shared-Gate Tensor Amortization Auditor (\lean{Stage19\_SharedGateTensorAmortizationAudit})}
 Turning Subagent $\Omega$ onto the gate-cost lower bounds of Stages 17 and 18 exposes a potential loophole: could a circuit use \textbf{Uhlig-style multi-output gate sharing} \cite{Uhlig1974} or bilinear fast matrix multiplication to amortize the per-switch cost strictly below $3$ binary gates? Stage 19 formalizes the \textbf{Shared-Gate Amortization Auditor} to prove that this evasion is impossible within the small-circuit budget.
 
-\begin{theorem}[\lean{amortized_switches_ge_three_forces_three_N} \& \lean{shared_gate_amortization_dichotomy}]\label{thm:amortization_audit}
+\begin{theorem}[\lean{amortized_three_forces_three_N} \& \lean{shared_gate_amortization_dichotomy}]\label{thm:amortization_audit}
 Let $\mathrm{audit} : \lean{SharedGateAmortizationSystem } \mathrm{shrink}\; \mathrm{val}$ audit the effective average gate cost per switch across $\mathrm{totalSwitches} \ge N$ superconcentrator routing nodes:
 \begin{enumerate}[noitemsep]
-    \item \textbf{Amortized Cost $\ge 3$ Forces $\ge 3N$ Gates (\lean{amortized_switches_ge_three_forces_three_N}):} If the amortized switch cost satisfies $\mathrm{amortizedCostPerSwitch} \ge 3$, then covering $N$ switches unconditionally forces:
+    \item \textbf{Amortized Cost $\ge 3$ Forces $\ge 3N$ Gates (\lean{amortized_three_forces_three_N}):} If the amortized switch cost satisfies $\mathrm{amortizedCostPerSwitch} \ge 3$, then covering $N$ switches unconditionally forces:
     \begin{equation}
         \mathrm{deMorganCircuitSize} \ge \mathrm{amortizedCostPerSwitch} \cdot \mathrm{totalSwitches} \ge 3 \cdot N.
     \end{equation}

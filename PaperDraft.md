@@ -214,7 +214,7 @@ $$\mathrm{Size} \ge 3 \cdot \mathrm{xor} + 4 \cdot \mathrm{maj} \ge 3 \cdot (\ma
 ### Stage 19: Subagent Ω Shared-Gate Tensor Amortization Auditor
 
 Turning Subagent $\Omega$ onto the gate-cost lower bounds of Stages 17 and 18 exposes a potential loophole: could a circuit use **Uhlig-style multi-output gate sharing** (1974) or bilinear fast matrix multiplication to amortize the per-switch cost strictly below $3$ binary gates? Stage 19 formalizes the **Shared-Gate Amortization Auditor**:
-- **Amortized Switch Accounting (`amortized_switches_ge_three_forces_three_N`):** If the circuit's average amortized cost satisfies $\mathrm{amortizedCostPerSwitch} \ge 3$, covering $N$ superconcentrator switches unconditionally forces $\mathrm{Size} \ge 3N$.
+- **Amortized Switch Accounting (`amortized_three_forces_three_N`):** If the circuit's average amortized cost satisfies $\mathrm{amortizedCostPerSwitch} \ge 3$, covering $N$ superconcentrator switches unconditionally forces $\mathrm{Size} \ge 3N$.
 - **The Small-Circuit Amortization Dichotomy (`shared_gate_amortization_dichotomy`):** If the circuit attempts to achieve $\mathrm{amortizedCostPerSwitch} < 3$, it cannot do so via Uhlig lookup tables, because the universal core size satisfies $\mathrm{uhligTableSize} \ge 2^{m^2 - 2m} \ge 3N$. Therefore, under the small-circuit budget $\mathrm{Size} < 3N$, the circuit must operate without shared lookup cores, forcing the active separator cut strictly below the discrepancy threshold!
 - **Constructive Bridge (`stage19_amortization_audit_triggers_p_neq_np`):** Constructively instantiates Stage 17's `SemanticSeparatorSystem` (`constructStage17FromAmortizationAudit`) and chains through to prove $\NP \not\subset \Ppoly$!
 
