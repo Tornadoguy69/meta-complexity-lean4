@@ -55,7 +55,7 @@ Every theorem listed below is verified in [`MetaComplexityMaster19.lean`](./Meta
 | **16** | `Stage16_ValiantDepthReductionRigidity` | `stage16_valiant_separator_triggers_p_neq_np` | Valiant depth reduction ($minCut \le S / \log D$); Superconcentrator barrier theorem |
 | **17** | `Stage17_InformationTheoreticXORBlowup` | `stage17_semantic_dichotomy_triggers_p_neq_np` | Inductive bias doubling ($2^d$); XOR superconcentrator $\ge 3N$ blowup refutation |
 | **18** | `Stage18_BoppanaMonotoneThresholdCollapse` | `stage18_correlated_dag_triggers_p_neq_np` | Correlated MAJ3 4-gate balance; Boppana deficit collapse; instantiates Stage 17 |
-| **19** | `Stage19_SharedGateTensorAmortizationAudit` | `stage19_amortization_audit_triggers_p_neq_np` | Shared-gate amortization audit: cost $< 3$ forces Uhlig $\ge 3N$ or separator cut |
+| **19** | `Stage19_SharedGateTensorAmortizationAudit` | `stage19_amortization_audit_triggers_p_neq_np` | Shared-gate amortization audit: cost $< 3$ forces Stage 6 Uhlig contradiction ($2^{km} < 2^{m^2 - 2m}$) or separator cut |
 
 ---
 
